@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS TODO LIST</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div>
+        <label for="inpText">Nový úkol:</label>
+        <input type="text" name="inpText" id="inpText">
+        <a href="javascript: onSubmitItem();">Přidat</a>
+        <a href="javascript: removeAll();">Odstranit všechny úkoly</a>
+        <a href="javascript: save();">Uložit list</a>
+    </div>
+
+    <ul id="taskList"></ul>
+
+    <script src="script.js"></script>
+</body>
+</html>
