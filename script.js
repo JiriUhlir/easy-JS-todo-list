@@ -30,16 +30,16 @@ function createItem(text) {
 }
 
 function removeItem(key) {
-    var res = list.delete(key);
+    let res = list.delete(key);
     if (res) {
         drawList();
     }
 }
 
 function load() {
-    var mapString = getCookie(cookieIdentifier);
+    let mapString = getCookie(cookieIdentifier);
     if(mapString !== null){
-        var mapArray = JSON.parse(mapString);
+        let mapArray = JSON.parse(mapString);
         list = new Map(mapArray);
         i = mapArray.length;
         drawList();
@@ -47,24 +47,24 @@ function load() {
 }
 
 function save() {
-    var mapString = JSON.stringify(Array.from(list.entries()));
+    let mapString = JSON.stringify(Array.from(list.entries()));
     setCookie(cookieIdentifier, mapString, 1000);
 }
 
 function drawList() {
     listEl.innerHTML = "";
     list.forEach((value, key) => {
-        var el = `<li><span>${value}</span><span class="removeBtn" onclick="removeItem(${key})">x</span></li>`;
-        var range = document.createRange();
-        var fragment = range.createContextualFragment(el);
+        let el = `<li><span>${value}</span><span class="removeBtn" onclick="removeItem(${key})">x</span></li>`;
+        let range = document.createRange();
+        let fragment = range.createContextualFragment(el);
         listEl.appendChild(fragment);
     });
 }
 
 function getCookie(name) {
-    var cookies = document.cookie.split(';');
-    for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i].trim();
+    let cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+        let cookie = cookies[i].trim();
         if (cookie.startsWith(name + '=')) {
             return decodeURIComponent(cookie.substring(name.length + 1));
         }
@@ -73,10 +73,8 @@ function getCookie(name) {
 }
 
 function setCookie(name, value, daysToExpire) {
-    var expirationDate = new Date();
+    let expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + daysToExpire);
-
-    var cookieString = `${name}=${encodeURIComponent(value)}; expires=${expirationDate.toUTCString()}; path=/`;
-
+    let cookieString = `${name}=${encodeURIComponent(value)}; expires=${expirationDate.toUTCString()}; path=/`;
     document.cookie = cookieString;
 }
