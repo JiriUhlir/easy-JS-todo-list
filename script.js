@@ -4,11 +4,11 @@ var textInput = document.getElementById('inpText');
 var listEl = document.getElementById('taskList');
 var cookieIdentifier = "task_list_cookie";
 
-window.onload = (event)=>{
+window.onload = (event) => {
     load();
 
-    textInput.addEventListener('keypress', (e)=>{
-        if(e.key == "Enter"){
+    textInput.addEventListener('keypress', (e) => {
+        if (e.key == "Enter") {
             onSubmitItem();
         }
     });
@@ -26,7 +26,7 @@ function removeAll() {
 function createItem(text) {
     i++;
     list.set(i, text);
-    drawList();
+    drawItem(text,i);
 }
 
 function removeItem(key) {
@@ -38,7 +38,7 @@ function removeItem(key) {
 
 function load() {
     let mapString = getCookie(cookieIdentifier);
-    if(mapString !== null){
+    if (mapString !== null) {
         let mapArray = JSON.parse(mapString);
         list = new Map(mapArray);
         i = mapArray.length;
@@ -53,12 +53,14 @@ function save() {
 
 function drawList() {
     listEl.innerHTML = "";
-    list.forEach((value, key) => {
-        let el = `<li><span>${value}</span><span class="removeBtn" onclick="removeItem(${key})">x</span></li>`;
-        let range = document.createRange();
-        let fragment = range.createContextualFragment(el);
-        listEl.appendChild(fragment);
-    });
+    list.forEach(drawItem);
+}
+
+function drawItem(value,key) {
+    let el = `<li><span>${value}</span><span class="removeBtn" onclick="removeItem(${key})">x</span></li>`;
+    let range = document.createRange();
+    let fragment = range.createContextualFragment(el);
+    listEl.appendChild(fragment);
 }
 
 function getCookie(name) {
